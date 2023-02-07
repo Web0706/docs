@@ -177,3 +177,80 @@ toB 项目权限问题主要分为四大块
 - 因为他们都是挂载到当前页面的 组件 实例身上的
 
 ## 面试官：你对 SPA 单页面的理解，它的优缺点分别是什么？
+
+- spa 就是单页面应用程序 vue 就是用来开发单页面应用程序的 实现的原理就是不同组件之间的切换和跳转
+- 不会出现多页面应用首次打开首页白屏的问题
+- 缺点就是不利于 seo(搜索引擎优化),可以用 ssr(服务端渲染)解决
+
+## ssr 是什么？
+
+- 渲染模式有两种 服务端渲染 客户端渲染
+  - ssr 就是服务端渲染
+  - vue 就是客户端渲染
+- vue 开发的是单页面应用 不利于 seo 但是可以用 ssr 解决 例如 nuxt.js 框架
+
+## Vue 组件之间的通信方式都有哪些？
+
+1.$emit(子向父)
+
+2.porps 父向子
+
+3.$refs
+
+4.$child
+
+5.$root
+
+6.$parent
+
+7.$listeners,$attrs
+
+8. event Bus
+
+9.vuex
+
+10.状态提升
+
+## $nextTick 实现的原理？
+
+- vue 更新是异步的有时会遇到 视图更新的但是视图上最新的数据暂时没办法拿到 这时候就可以用$nextTick
+- vue.js 在内部封装时采用了优雅降级 加了判断 promise(微任务) -> MutationObserve(微任务) -> setTimeout(宏任务)
+
+## vuex 是什么？
+
+- vuex 是 vue 集中式状态管理工具 多个组件要用到的数据可以储存在 vuex 中
+- vuex 配置
+  - state 存放数据的地方
+  - mutations 唯一可以修改数据的地方
+  - actions(ai ke shen) mutations 里面写的是同步的代码 异步代码要写到 actions 里 例如 ajax
+  - getter 类似于组件内的计算属性 可以解决组件内使用 vuex 表达式过长的问题
+  - modules 模块 项目较大的时候 我们可以将 vuex 分成几个不同的模块
+- 辅助函数
+  - mapState
+  - mapMutations
+  - mapActions
+  - mapGetter
+- 缺点
+  - veux 里面的数据不是持久化的 页面一刷新就没有了 所以我们要进行本地持久化 存到 localStorage 或者借助 vuex-persistedstate
+    (persisted（pe sei si dui de）)
+- 命名空间
+  - 把 vuex 模块化容易造成命名的混乱 变量方法之间的额相互覆盖 可以在单个模块的配置中加上 namespaced 开始命名空间
+- 在其中一个模块中的想要操作其他模块
+  - 配置中加上{root: true}
+
+## Vue2 中注册在 router-link 上事件无效解决方法
+
+- 在 router-link 上加上.native 修饰符
+
+## ajax 请求代码应该写在组件的 methods 中还是 vuex 的 actions 中？
+
+- 返回的数据如果是当前组件的就写在 methods 中 如果是公共的就写在 actions 中
+
+## 操作 dom 是写在 created 中还是 mounted 中?
+
+- 都可以 最好写在 mounted 中 此时是最早可以开始操作 dom 的时机
+- 在 cerated 中 可以用$nextTick
+
+## 发送 ajax 是写在 created 还是 mounted？
+
+- 如果需要
