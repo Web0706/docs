@@ -1,3 +1,19 @@
+# 继承的几种方式？
+
+# 强缓存 协商缓存
+
+# http 状态码
+
+# webpack 打包优化
+
+# 项目中优化
+
+# vue 响应式原理
+
+# call,bind,apply 的区别
+
+# WebSocket
+
 ## 如何理解 vue
 
 vue 是一个前端渐进式的框架 其设计采用了 mvvm 的思想 即数据驱动 其便于进行组件化开发
@@ -253,4 +269,137 @@ toB 项目权限问题主要分为四大块
 
 ## 发送 ajax 是写在 created 还是 mounted？
 
-- 如果需要
+- 如果数据拿回来需要操作 dom 如数据可视化 百度地图 可以写在 mounted 中
+- 不需要操作 dom 最好鞋子啊 cerated 中
+
+## v-model 的理解
+
+- v-model 是一个语法糖 是@input=“msg = $evenet” 和 :value="msg" 的简写
+- 可以实现双向数据绑定
+- 可以用于父子组件通信 缺点就是一个组件上只能写一个 v-model
+  - 可以用 sync 修饰符
+
+## Vue 项目中你是如何解决跨域的呢？
+
+- 之前公司用的都是 cors 是后端在做
+- 要前端处理的话 我也会 在 vue.config.js 中 devServe 配置项中添加 proxy 选项 这是开发环境里的解决方案 写完后打包上线 需要后端用 nginx 实现反向代理
+- jsonp
+
+  - 利用 script 标签可以跨域的特点
+  - 只能发送 get 请求
+
+  ## vue 的两种路由模式？
+
+  - hash 模式
+    - 利用 window.onhashchange
+  - history 模式
+    - history.pushState 来实现
+
+## 你都知道有哪些路由守卫？
+
+- 全局路由守卫
+  - router.beforeEach
+  - router.afterEach
+- 路由独享守卫
+  - beforeEnter
+  - 当项目中 只有一个或少量页面 需要权限时
+- 组件内路由守卫
+  - beforeRouteEnter 前置
+  - beforeRouteUpdate
+  - beforeRouteLeave 后置
+
+## 设计模式你了解哪些？
+
+- 单例模式
+  - 只有一个组件实例 确保了唯一性
+  - vue 组件注册(vue.use())就采用了单例模式
+  - 所有的插件都采用了单例模式
+- 发布订阅模式
+  - 发布--订阅模式 定义了一种对象间的一对多的关系 当被依赖的对象状态发生改变时 会通知所有依赖于它的对象
+- 观察者模式
+  - 观察者模式也是一种一对多的被依赖的关系 但是他与发布订阅模式之间的区别就是 没有了中间的事件处理的函数 直接与依赖它的对象关联
+
+## 盒子水平垂直居中?
+
+- 开启绝对定位 边设置为 0 margin:auto
+- 绝对定位 left:50% top:50% transform 水平 垂直都平移自身的-50%
+- display:flex justify-content:center;align-items:center;
+- 开启 flex 布局 设置 margin:auto
+
+## 盒模型
+
+- 盒模型是由宽高 内外边距 边框
+- 有两种盒模型 标准盒模型 和 怪异盒子模型(c3 盒模型)
+  - 开启 c3 盒模型的方法 box-sizing: border-box;
+  - 它不会撑大盒子 会自动内减
+
+## c3 新属性
+
+- flex 弹性布局
+- transform 2 D 转换
+- transition 过渡
+- 帧动画 animation(an nie mie shen)
+- 背景图片的大小 background-size:cover,contain
+- 各种阴影 text box
+- 盒模型 box-sizing
+- 边框圆角 border-radius
+
+## bfc
+
+- bfc(bu laoke for mate kang tai si ke)即格式化上下文 他会形成一块独立的额渲染区域 不会影响到外界
+- 开启 bfc : bfc:overflow 不是 visible,position 为 absolute 或 fixed,display 为 inline-block,flex
+- bfc 可以解决的问题:margin 的塌陷,清除浮动 可以做到左边固定右边自适应
+
+## less/scss 的特性
+
+- 共同
+  - 支持嵌套语法
+  - 都有 mixin
+  - 都有父选择器
+  - 可以定义变量
+  - 都是 css 预解析
+  - 都支持运算
+- 不同
+  - less 变量使用@定义 sass 使用$号定义
+  - sass 支持 for 循环 分支语句 less 不支持
+
+## 移动端适配
+
+- rem rem 是相对单位 相对于 html 根节点 font-size 大小 我们可以用 js 获取当前页面的宽度 来设置 html font-size 大小实现适配 插件 portcss-pxtorem
+
+- vw vh 是相对于当前视口的宽度/高度 他把当前视口的宽/高分为 100 份 每一份 vw/vh 都是当前视口宽/高的 1% 我们可以借助 protcss-px-to-viewport 来实现
+
+## rem，em，vw，vh，vmin，vmax，px 的区别
+
+- px 是绝对单位 量出来是多少就是多少
+
+- rem 是相对于 html 根节点 font-size 大小
+
+- vw vh 是相对于视口的宽和高
+
+- em 是当前节点的父元素的 font-size 大小 一般用于首行缩进
+
+- vmax 取当前屏幕长宽的最大值 vmin 取当前屏幕的最小值
+
+## 让 Chrome 支持小于 12px 的文字方式有哪些?
+
+- zoom 非标属性 要考虑兼容性
+- -webkit-transform:scale() (谷歌浏览器)
+- 使用图片
+
+## flex:1 ？
+
+- 是 flex 布局的三个属性的符合写法
+
+  - flex-grow: 1; 盒子放大比例
+  - flex-shrink: 1; 盒子缩小比例
+  - flex-basis: 0%; 设置为 0 会覆盖当前盒子宽度
+
+## 重绘(repaint)/回流(reflow)
+
+- 浏览器渲染原理
+  - html 通过 html 解析器解析为 dom 树 , css 通过 css 解析为渲染规则
+  - 两者会合二为一 成为渲染树
+  - 浏览器根据渲染树 渲染页面
+- 重绘 -- 回流
+  - 代码发生了
