@@ -31,6 +31,10 @@ module.exports = {
       {
         text: '开发环境',
         link: '/dev/windows'
+      },
+      {
+        text: '移动端适配',
+        link: '/dev/mobile'
       }
     ],
     sidebar: {
@@ -43,7 +47,8 @@ module.exports = {
         'powershell',
         'vscode',
         'git',
-        'ssh'
+        'ssh',
+        'mobile'
       ]
     },
     sidebarDepth: 2,
