@@ -1,25 +1,85 @@
 # 继承的几种方式？
 
 - 原型链继承
-  - 父类的实例作为 子类的原型
+  - 父类构造函数 new 的实例 作为 子类构造函数的原型 只能继承原型链上的属性和方法
 - 借用构造函数继承
+  - 在子构造函数里 通过 call 来调用父构造函数 传入需要批量构建的属性
 - 组合式继承
+  - 原型链继承和借用构造函数继承的结合 属性会有两层 里层属性的值为 undefined
 - 寄生组合式继承
+  - 通过 Object.cerate() 创建一个父构造函数的原型 解决了组合式继承属性有两份的问题
 - es6 class 继承
+  - es6 calss extends 继承 通过 super() 调用父构造函数并传参
 
 # 强缓存 协商缓存
 
+- 缓存就是浏览器会对发送过的请求的数据进行缓存
+- 强缓存就是请求发送之前 浏览器会检查 http 请求头里的 Expires (a ke si bai ye si) Cache-Control(kai shi kan chou) 来检查资源是否过期 如果资源过期则会触发协商缓存
+- 协商缓存会向服务器发送一个请求头携带 Last-Modifed 和 Etag 的请求 由服务器对比文件是否更改 走 304 重定向 还是返回新数据
+
 # http 状态码
+
+- 2 开头表示响应成功 200 201 一般是 post put 的请求会返回表示响应成功 并创建了一个新的资源
+- 3 开头 表示重定向消息 301 请求网址永久更改 302 网址暂时更改 304 浏览器缓存消息
+- 4 开头 客户端错误 400 表示请求错误 401 常见 token 过期 404 服务器找不到请求的资源
+- 5 开头 服务器端错误 500 服务器错误 501 服务器不支持当前请求方法 505 不支持请求中的 http 版本
 
 # webpack 打包优化
 
+- 关闭 sourcemap 关闭后 会少成成 map 文件
+- 缩小 loader 查找范围
+- 配置路径别名
+- 开启多线程 thread-loader 用来代替 happypack
+- 移除 console.log 可以通过插件 babel-plugin-transform-remove-console
+- 压缩图片 image-webpack-loader
+- DllPlugin 将 src 中的代码与 第三方库的代码分开 每次打包只是单独打包 src 中的逻辑代码
+
 # 项目中优化
 
-# vue 响应式原理
+- 代码层面
+
+  - 路由懒加载
+  - pc 端分页
+  - 图片懒加载
+  - 移动端长列表优化 虚拟列表 上拉加载 下拉刷新
+  - 第三方 ui 库按需引入
+  - 防抖 节流
+  - 封装组件
+  - 减少重绘和回流 documentFragment
+  - 类名操作 不要写行内
+  - 用 css3 新属性 开始 gpu 硬件加速 transform opacity filter will-change
+
+- 图片
+
+  - 使用精灵图(雪碧图)
+  - 字体图标
+  - 压缩图片
+
+- http 优化
+  - 用 http2.0 做到多路复用
+  - 开启浏览器缓存机制
+
+# vue2 响应式原理
+
+- 观察者模式 dependence(di pan den ci) 发布者 watcher 观察者 一对多 发布者(1) --> 观察者(多)
+
+- vue 响应式就是 数据变化时 视图会重新渲染
+  - 实现 vue 响应式 的就是 数据劫持 加上 观察者模式 数据劫持实现了数据变化时 程序是知道的 观察者模式实现了数据变化时 视图中多个用到数据的地方跟着变化
+  - 首先通过 Observer 类对 data 里面的数据 用 Object.defineProperty 改写为 gettr settr 的写法 在 gettr 中为每一个数据都创建一个 dep 发布者实例对象
+  - 通过 Compile(kang pai ou ) 模板解析器 对模板进行编译得到 data 中对应的 watcher 订阅者 把每订阅者添加进 dep 实例对象里
+  - 一旦数据发生改变 会通知对应的 dep dep 会对所有的订阅者 watcher 进行遍历通知 watcher 会更新相应的视图
 
 # call,bind,apply 的区别
 
+- call bind apply 都可以改变函数的 this 指向
+- call apply 都是立即执行此函数 bind 不会立即调用 而是复制一个改变 this 的函数体
+- call 和 apply 第一个参数都是要改变的 this 指向 call 第二个参数可以传入很多个参数 apply 第二个参数传入的是一个数组
+  - apply 可以用来求数组的最大值和最小值 借助 Math 数学对象
+
 # WebSocket
+
+- WebSocket 一种网络传输协议 可以实现双工通信 进行双向数据传输
+- 弹幕 协同编辑(腾讯文档) 聊天
 
 ## 如何理解 vue
 
