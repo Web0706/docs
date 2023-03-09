@@ -31,10 +31,6 @@ module.exports = {
       {
         text: '开发环境',
         link: '/dev/windows'
-      },
-      {
-        text: '移动端适配',
-        link: '/dev/mobile'
       }
     ],
     sidebar: {

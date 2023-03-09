@@ -1,3 +1,130 @@
+# **自我介绍**
+
+面试官您好，我叫王守振，来自河南南阳，从事前端行业三年了
+
+​ 21 底到今年就职于广州奇点未来科技有限公司，公司的话主要做二手电子产品手机这一块主要是 期间接了一个合作公司的项目定制了一个人力资源的后台，最近的做的是小程序商城后台管理项目和微信小程序，技术栈是 vue 全家桶和 uinapp ，后台项目的话 主要就是对商品的库存信息等进行管理 进行数据的统计展示 对商城的多种状态订单进行管理
+
+## 最近项目介绍
+
+### **项目背景：**
+
+公司自有平台
+
+## **项目模块罗列：**
+
+### 小程序后台
+
+- 首页 :当日总体数据的展示
+
+- 商品: 商品管理 商品分类
+
+- 订单: 订单管理 订单处理 订单配送 订单评价
+
+- 会员：会员展示 等级金额排序 添加说明
+
+- 财务: 退款管理 退款记录 进出帐管理
+
+- 数据: 订单成交量 商品销量 用户访问量
+
+  ### 小程序
+
+  - 首页: 轮播图 Menu(mai niu)菜单 评论页 首页虚拟列表 商品列表 自定义 nabbar 商品列表
+
+  - 分类: 商品分类展示跳转
+
+  - 用户页面 ： 用户个人信息展示 收藏列表 订单页 回收估价 优惠券
+
+  - 搜索页
+
+### **具体每个模块细讲**
+
+- 首页: 嵌套路由 类似于 tabbar 对今日成交金额 客单价 订单的笔数 总的浏览量 分为不同的子页面 使用 ECharts 的 雷达 漏斗 柱状 饼图 对每个总数据的详细信息进行分析并展示 数据实现真自动实时更新 (真自动与假自动)
+
+- 商品管理: 管理商品的库存 出库入库 实现 excel 导入商品信息 对库内的商品进行分类 基于不同的品牌 机型 内存 成色 发售地区 进行分类搜索 商品的上下架 编辑商品的信息 价格 对商品的状态进行分类 在售 已售罄 库存中 添加商品标签 热卖 新品 推荐
+
+- 订单: 对订单进行管理 对不同状态的订单 如待发货 待收货 已完成 等 封装筛选条件表单 如下单的时间 订单的来源 活动订单 售后状态 物流配送方式 订单的类型 修改订单的状态 修改用户收货信息 导出订单为 excel 封装弹出展示组件对商品发货单 详细进行展示 打印订单信息
+
+- 会员: 头部筛选表单复用 对会员的按照 等级 金额排序 列表 展示会员的个人信息 注册时间 成交的订单量及金额量 对会员的信息进行编辑 添加会员标签 针对性营销 查看会员订单
+
+- 财务:退款 流水
+
+- 数据: echats 商品数据 支付人数 笔数 金额
+
+# 深浅拷贝
+
+- 浅拷贝
+  - Object.assign(空对象, 源对象)
+  - es6 ... 拓展运算符
+- 深拷贝
+
+  - 递归
+
+  ```js
+  function deepCopy(newObj, oldObj) {
+    debugger
+    for (let k in oldObj) {
+      // 处理数组的问题  一定先写数组 在写 对象 不能颠倒
+      if (oldObj[k] instanceof Array) {
+        newObj[k] = []
+        //  newObj[k] 接收 []  hobby
+        //  oldObj[k]   ['乒乓球', '足球']
+        deepCopy(newObj[k], oldObj[k])
+      } else if (oldObj[k] instanceof Object) {
+        newObj[k] = {}
+        deepCopy(newObj[k], oldObj[k])
+      } else {
+        //  k  属性名 uname age    oldObj[k]  属性值  18
+        // newObj[k]  === o.uname  给新对象添加属性
+        newObj[k] = oldObj[k]
+      }
+    }
+  }
+  deepCopy(o, obj) // 函数调用  两个参数 o 新对象  obj 旧对象
+  ```
+
+  - JSON 不能拷贝 undefined 和 函数
+
+  ```js
+  const o = JSON.parse(JSON.stringify(obj))
+  ```
+
+# 从输入 url 到展示的过程
+
+- 1.用户输入 url 浏览器会解析 url 并发起请求
+- 2.发起请求 根据 url 发起 http 请求 请求包括 dnf 解析 tcp 握手 请求响应等阶段
+- 3.接收响应 会返回 htmlcssjs 文件
+- 4.解析 html 将 html 解析成 dom 树 css 解析 css 渲染规则 两个结合在一起合并为一个渲染树
+- 5.绘制页面
+- 6.js 执行
+- 7.页面关闭回收资源
+
+# webpack 核心配置项
+
+- entry：打包入口路径
+- output：打包输出文件路径和名字
+- module：定义模块加载方式和转换规则
+- devserver：用于开发环境的服务器配置
+- externals：打包忽略模块
+- plugins：扩展 webpack 的功能 插件
+
+# 新增语法
+
+- 新增数据类型 symbol 独一无二的值
+- let const 有块级作用域 不存在变量生命提升 暂时性死区
+- 结构赋值
+- Map Set
+  - object 的键只能是字符串或 ES6 的 symbol 值，而 Map 可以是任何值。
+  - Map 对象有一个 size 属性，存储了键值对的个数，而 object 对象没有类似属性。
+  - Set 对象唯一的特性 实现数组去重
+- assign 用于浅拷贝源对象可枚举属性到目标对象。
+- is 方法和（===）功能基本类似，用于判断两个值是否绝对相等。
+- find()和 findIndex()，查找数组中符合条件的元素值或索引，方法不会修改原数组。
+- includes()用于检测数组是否包含某个值，可以指定开始位置。
+- 函数默认值
+- class 类
+- import export
+- Promise
+
 # 继承的几种方式？
 
 - 原型链继承
@@ -17,6 +144,15 @@
 - 强缓存就是请求发送之前 浏览器会检查 http 请求头里的 Expires (a ke si bai ye si) Cache-Control(kai shi kan chou) 来检查资源是否过期 如果资源过期则会触发协商缓存
 - 协商缓存会向服务器发送一个请求头携带 Last-Modifed 和 Etag 的请求 由服务器对比文件是否更改 走 304 重定向 还是返回新数据
 
+# 浏览器缓存机制
+
+- 我们客户端向服务器发送请求要资源时候，有时候资源在本地是有现成，这个时候我们就需要一套机制判断本地的能不能继续使用，这就称为浏览器缓存机制
+- 缓存机制分为两个阶段：强缓存和协商缓存
+- 强缓存是用来看本地资源有没有过期，通过二个标识 expire,cache-control 来判断，如果这二个响应头都有的时候，expire 优先级更高
+- 如果通过强缓存发现资源是过期了，下面就进入协商缓存的阶段 通过二个响应头标识判断 last-modified,etag，这二个同时存在，以 etag 为准，只要这个服务器上资源和本地资源的 etag 一样，就会返回 304 状态告诉客户端可以继续用，如果不可以用就返回 200，返回新的资源把本地旧的替换掉
+
+- 先看这个东西有没有过期，没有过期肯定是可以放心的吃，如果过期了，有些比如像饼干虽然过期了，但是还是可以吃的
+
 # http 状态码
 
 - 2 开头表示响应成功 200 201 一般是 post put 的请求会返回表示响应成功 并创建了一个新的资源
@@ -28,11 +164,13 @@
 
 - 关闭 sourcemap 关闭后 会少成成 map 文件
 - 缩小 loader 查找范围
+
 - 配置路径别名
 - 开启多线程 thread-loader 用来代替 happypack
 - 移除 console.log 可以通过插件 babel-plugin-transform-remove-console
 - 压缩图片 image-webpack-loader
 - DllPlugin 将 src 中的代码与 第三方库的代码分开 每次打包只是单独打包 src 中的逻辑代码
+- 使用按需引入触发 webpack 的 Tree Shaking(树摇)
 
 # 项目中优化
 
@@ -80,6 +218,11 @@
 
 - WebSocket 一种网络传输协议 可以实现双工通信 进行双向数据传输
 - 弹幕 协同编辑(腾讯文档) 聊天
+
+# 虚拟列表
+
+假设有 1 万条记录需要同时渲染，直接渲染会导致卡死 比如我们屏幕的可见区域的高度为 500px,而列表项的高度为 50px，则此时我们在屏幕中最多只能看到 10 个列表项，那么在首次渲染的时候，我们只需加载 10 条即可 多一点
+通过监听 scroll 事件 用事件对象里 scrollTop 这个属性来计算 页面蜷曲的头部
 
 ## 如何理解 vue
 
@@ -355,12 +498,14 @@ toB 项目权限问题主要分为四大块
   - 利用 script 标签可以跨域的特点
   - 只能发送 get 请求
 
-  ## vue 的两种路由模式？
+  ## vue 的三种路由模式？
 
   - hash 模式
     - 利用 window.onhashchange
   - history 模式
     - history.pushState 来实现
+  - abstract
+    - 因为 ssr 里面玩 vue，里面是服务器，没有浏览器，没有 bom 的 api(history,onhashchange),只能用抽象的方式去模拟路由模式，称为 abstract
 
 ## 你都知道有哪些路由守卫？
 
@@ -470,3 +615,108 @@ toB 项目权限问题主要分为四大块
   - 浏览器根据渲染树 渲染页面
 - 重绘 -- 回流
   - 代码发生了
+
+```js
+const arr = [5, 8, 12, 1, 2, 3, 4, 5, 6, 7, 1, 5, 7, 5, 2, 6, 3]
+
+// 一: new Set()
+// 输出为一个去重后的对象
+// console.log(new Set(arr))
+// 1.拓展运算符展开数组
+// console.log([...new Set(arr)])
+// 2.Array.from()
+// console.log(Array.from(new Set(arr)))
+// 3.函数封装
+// const removeDuplication = arr => [...new Set(arr)]
+
+// console.log(removeDuplication(arr)) // [1, 2, 3, 4, 5, 6, 7]
+
+// 二:indexOf()
+// const removeDuplication = arr => {
+//   const tempArr = []
+//   arr.forEach(
+//     item => (tempArr.indexOf(item) === -1 ? tempArr.push(item) : item)
+
+//     // if (tempArr.indexOf(item) === -1) {
+//     //   tempArr.push(item)
+//     // }
+//   )
+//   return tempArr
+// }
+
+// console.log(removeDuplication(arr))
+
+// 三:sort()
+// const removeDuplication = arr => {
+//   arr = arr.sort()
+//   const tempArr = []
+//   arr.forEach((item, index) =>
+//     item !== arr[index - 1] ? tempArr.push(item) : item
+//   )
+
+//   // {
+//   //   if (item !== arr[index - 1]) {
+//   //     tempArr.push(item)
+//   //     console.log(111)
+//   //   }
+//   // }
+
+//   return tempArr
+// }
+
+// console.log(removeDuplication(arr))
+
+// 四.includes
+
+// const removeDuplication = arr => {
+//   const tempArr = []
+//   arr.forEach(item => (tempArr.includes(item) ? item : tempArr.push(item)))
+
+//   return tempArr
+// }
+
+// console.log(removeDuplication(arr))
+
+// 五.filter()
+
+// const removeDuplication = arr => {
+//   return arr.filter((item, index) => arr.indexOf(item) === index)
+// }
+
+// console.log(removeDuplication(arr))
+
+// 六.reduce
+// const removeDuplication = arr => {
+//   return arr.reduce((prev, item, index) => {
+//     if (!prev.includes(item)) {
+//       prev.push(item)
+//     }
+//     return prev
+//   }, [])
+// }
+
+// console.log(removeDuplication(arr))
+
+// 七.some
+
+// const removeDuplication = arr => {
+//   const tempArr = []
+//   arr.forEach(item =>
+//     !tempArr.some(temp => temp === item) ? tempArr.push(item) : item
+//   )
+
+//   // {
+//   //   if (!tempArr.some(temp => temp === item)) {
+//   //     tempArr.push(item)
+//   //   }
+//   // }
+
+//   return tempArr
+// }
+
+// console.log(removeDuplication(arr))
+```
+
+```js
+
+```
