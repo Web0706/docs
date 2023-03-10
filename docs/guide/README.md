@@ -50,6 +50,13 @@
 
 - 数据: echats 商品数据 支付人数 笔数 金额
 
+# vue2 与 vue3
+
+- 选项式 api 和组合式 api
+- 响应式原理 ref() reactive() vuex -> pinia
+- 构建工具 webpack -> vite
+- template 根节点
+
 # 小程序跳转页面多种方式
 
 - ```js
