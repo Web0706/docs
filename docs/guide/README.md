@@ -50,43 +50,101 @@
 
 - 数据: echats 商品数据 支付人数 笔数 金额
 
+# 小程序跳转页面多种方式
+
+- ```js
+
+  <navigator url="../navigator/navigator?title=navigator11" open-type="navigate" hover-class="navigator-hover">保留当前页跳转</navigator>
+
+  <navigator url="../redirect/redirect?title=redirect" open-type="redirect"       hover-class="other-navigator-hover">关闭当前页跳转</navigator>
+
+  <navigator url="../tabbar/tabbar" open-type="switchTab" hover-class="other-navigator-hover">跳转到 tabBar 页面</navigator>
+  ```
+
+  - 编程式跳转
+    - wx.navigateTo: 保留当前页面跳转
+    - wx.redirectTo: 关闭当前页面跳转
+    - wx.switchTab: 跳转到底部标签导航指定的页面
+  - wx.navigateBack 返回上一页
+
+# vue 数据改变页面不更新
+
+- $set(原数组,索引,赋值的值)
+- forceUpdate() 页面强制刷新
+- watch 监听
+
+# 常用数组方法
+
+- map 映射 (不改变原数组)
+- reduce 累加
+- filter 返回一个新数组里面是通过条件的元素 (不改变原数组)
+- foreach
+- some 只要有一个满足返回 true 空数组为 false
+- every 是否所有的元素都满足条件 满足为 true 否则为 false 空数组为 true
+- find 找到满足条件的哪一项
+- findindex 找到满足条件的哪一项的索引
+- sort 排序
+- includes 数组里面是否包含这一项 返回一个布尔值
+
+# webpack 常用插件
+
+    - webpack-dev-server  开发环境热更新
+    - mini-css-extract-plugin  该插件把CSS提取到单独的文件中。通过link标签嵌入打包出的html文件里。而style-loader是通过style标签内嵌在html文件里。
+    - html-webpack-plugin 该插件会生成一个HTML文件,把所有webpack打包后的文件用脚本标签嵌入进去。
+    - Terser(che ser)Plugin 和 CssMinimizerPlugin  压缩js 和 css
+    - webpack-bundle-analyzer 打包后用于性能分析
+
+- 配置
+  - optimization(ao pu to my sei shen) 开启一下
+  - plugins 需要 new 一下 配置路径和打包的文件名
+
+# webpack 常用 loader
+
+- babel-loader 代码降级
+- css-loader
+- html-loader
+- less-loader
+- scss-loader
+- style-loader
+- thread-loader 开启多线程打包 代替 happypack
+
 # 深浅拷贝
 
 - 浅拷贝
-  - Object.assign(空对象, 源对象)
-  - es6 ... 拓展运算符
+- Object.assign(空对象, 源对象)
+- es6 ... 拓展运算符
 - 深拷贝
 
-  - 递归
+- 递归
 
-  ```js
-  function deepCopy(newObj, oldObj) {
-    debugger
-    for (let k in oldObj) {
-      // 处理数组的问题  一定先写数组 在写 对象 不能颠倒
-      if (oldObj[k] instanceof Array) {
-        newObj[k] = []
-        //  newObj[k] 接收 []  hobby
-        //  oldObj[k]   ['乒乓球', '足球']
-        deepCopy(newObj[k], oldObj[k])
-      } else if (oldObj[k] instanceof Object) {
-        newObj[k] = {}
-        deepCopy(newObj[k], oldObj[k])
-      } else {
-        //  k  属性名 uname age    oldObj[k]  属性值  18
-        // newObj[k]  === o.uname  给新对象添加属性
-        newObj[k] = oldObj[k]
-      }
+```js
+function deepCopy(newObj, oldObj) {
+  debugger
+  for (let k in oldObj) {
+    // 处理数组的问题  一定先写数组 在写 对象 不能颠倒
+    if (oldObj[k] instanceof Array) {
+      newObj[k] = []
+      //  newObj[k] 接收 []  hobby
+      //  oldObj[k]   ['乒乓球', '足球']
+      deepCopy(newObj[k], oldObj[k])
+    } else if (oldObj[k] instanceof Object) {
+      newObj[k] = {}
+      deepCopy(newObj[k], oldObj[k])
+    } else {
+      //  k  属性名 uname age    oldObj[k]  属性值  18
+      // newObj[k]  === o.uname  给新对象添加属性
+      newObj[k] = oldObj[k]
     }
   }
-  deepCopy(o, obj) // 函数调用  两个参数 o 新对象  obj 旧对象
-  ```
+}
+deepCopy(o, obj) // 函数调用  两个参数 o 新对象  obj 旧对象
+```
 
-  - JSON 不能拷贝 undefined 和 函数
+- JSON 不能拷贝 undefined 和 函数
 
-  ```js
-  const o = JSON.parse(JSON.stringify(obj))
-  ```
+```js
+const o = JSON.parse(JSON.stringify(obj))
+```
 
 # 从输入 url 到展示的过程
 
@@ -109,9 +167,11 @@
 
 # 新增语法
 
-- 新增数据类型 symbol 独一无二的值
 - let const 有块级作用域 不存在变量生命提升 暂时性死区
+- import export
+- Promise
 - 结构赋值
+- 新增数据类型 symbol 独一无二的值
 - Map Set
   - object 的键只能是字符串或 ES6 的 symbol 值，而 Map 可以是任何值。
   - Map 对象有一个 size 属性，存储了键值对的个数，而 object 对象没有类似属性。
@@ -122,8 +182,6 @@
 - includes()用于检测数组是否包含某个值，可以指定开始位置。
 - 函数默认值
 - class 类
-- import export
-- Promise
 
 # 继承的几种方式？
 
